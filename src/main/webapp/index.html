@@ -12,7 +12,12 @@
 </style>
 </head>
 <body>
-	<section id="main" ng-cloak ng-controller="TodoCtrl"></section>
+	<section id="main" class="container" ng-cloak ng-controller="TodoCtrl">
+		<table class="table table-striped">
+			<thead><tr><th>Todo</th></tr></thead>
+			<tbody><tr ng-repeat="todo in todos"><td>{{todo.title}}</td></tr></tbody>
+		</table>
+	</section>
 	<script src="js/angular.js"></script>
 	<script src="js/app.js"></script>
 </body>
