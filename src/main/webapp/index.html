@@ -9,11 +9,31 @@
 [ng-cloak] {
 	display: none;
 }
+
+body {
+	margin-top: 50px;
+}
 </style>
 </head>
-<body>
-	<section id="main" class="container" ng-cloak ng-controller="TodoCtrl">
-		<label>Search: <input type="text" ng-model="searchText" /></label>
+<body ng-controller="TodoCtrl">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#/list">Todo</a>
+				<form class="navbar-form pull-right">
+					<div class="input-prepend">
+						<span class="add-on">Search</span> <input type="text" ng-model="searchText">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<section class="container" ng-cloak>
+		<form class="form-inline">
+			<input type="text" ng-model="newTodoTitle"><button class="btn btn-priary" ng-click="addTodo()">Add</button>
+		</form>
+	</section>
+	<section id="main" class="container" ng-cloak>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -24,10 +44,8 @@
 			<tbody>
 				<tr ng-repeat="todo in todos | filter:searchText">
 					<td>{{todo.title}}</td>
-					<td>
-						<span class="label label-success" ng-show="todo.completed">Done</span>
-						<span class="label label-info" ng-hide="todo.completed">Open</span>
-					</td>
+					<td><span class="label label-success" ng-show="todo.completed">Done</span> <span class="label label-info"
+						ng-hide="todo.completed">Open</span></td>
 				</tr>
 			</tbody>
 		</table>
