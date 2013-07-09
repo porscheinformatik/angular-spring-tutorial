@@ -3,8 +3,10 @@ package at.porscheinformatik.tutorial.todo.web;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +30,13 @@ public class TodoController
 
     @RequestMapping(value = "/todo/new", method = RequestMethod.POST)
     @ResponseBody
-    public Todo newTodo(@RequestBody Todo todo)
+    public Object newTodo(@RequestBody @Valid Todo todo, BindingResult result)
     {
+        if (result.hasErrors())
+        {
+            return new Error().addErrors(result.getAllErrors());
+        }
+
         return todoService.addTodo(todo.title);
     }
 }

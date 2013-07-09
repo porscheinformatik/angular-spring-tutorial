@@ -7,10 +7,14 @@ todo.controller('TodoCtrl', function($scope, $http) {
   });
 
   $scope.addTodo = function() {
-    $scope.todos.push({
-      title : $scope.newTodoTitle,
-      completed : false
+    $http.post('data/todo/new', {
+      title : $scope.newTodoTitle
+    }).success(function(data) {
+      $scope.errors = data.errors;
+      if (!data.errors) {
+        $scope.todos.push(data);
+        $scope.newTodoTitle = '';
+      }
     });
-    $scope.newTodoTitle = '';
   };
 });

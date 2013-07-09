@@ -29,8 +29,10 @@ body {
 		</div>
 	</div>
 	<section class="container" ng-cloak>
-		<form class="form-inline">
-			<input type="text" ng-model="newTodoTitle"><button class="btn btn-priary" ng-click="addTodo()">Add</button>
+		<form name="addTodoForm" class="form-inline">
+			<div ng-repeat="error in errors" class="alert">{{ error }}</div>
+			<input type="text" ng-model="newTodoTitle" required ng-minlength="5" maxlength="50">
+			<button class="btn btn-priary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid">Add</button>
 		</form>
 	</section>
 	<section id="main" class="container" ng-cloak>
