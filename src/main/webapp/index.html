@@ -11,7 +11,7 @@
 }
 
 body {
-	margin-top: 50px;
+	margin-top: 60px;
 }
 </style>
 </head>
@@ -28,30 +28,7 @@ body {
 			</div>
 		</div>
 	</div>
-	<section class="container" ng-cloak>
-		<form name="addTodoForm" class="form-inline">
-			<div ng-repeat="error in errors" class="alert">{{ error }}</div>
-			<input type="text" ng-model="newTodoTitle" required ng-minlength="5" maxlength="50">
-			<button class="btn btn-priary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid">Add</button>
-		</form>
-	</section>
-	<section id="main" class="container" ng-cloak>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Todo</th>
-					<th>Completed?</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="todo in todos | filter:searchText">
-					<td>{{todo.title}}</td>
-					<td><span class="label label-success" ng-show="todo.completed">Done</span> <span class="label label-info"
-						ng-hide="todo.completed">Open</span></td>
-				</tr>
-			</tbody>
-		</table>
-	</section>
+	<ng-view></ng-view>
 	<script src="js/angular.js"></script>
 	<script src="js/app.js"></script>
 </body>

@@ -1,0 +1,26 @@
+<section class="container">
+	<form name="addTodoForm" class="form-inline">
+		<div ng-repeat="error in errors" class="alert">{{ error }}</div>
+		<input type="text" ng-model="newTodoTitle" required ng-minlength="5" maxlength="50">
+		<button class="btn btn-priary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid">Add</button>
+	</form>
+</section>
+<section id="main" class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Todo</th>
+				<th>Completed?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="todo in todos | filter:searchText">
+				<td>{{todo.title}}</td>
+				<td><span class="label label-success" ng-show="todo.completed">Done</span> <span class="label label-info"
+					ng-hide="todo.completed">Open</span></td>
+				<td>{{todo.due | date}}</td>
+				<td><button class="btn" ng-click="edit(todo.id)">Edit</button></td>
+			</tr>
+		</tbody>
+	</table>
+</section>

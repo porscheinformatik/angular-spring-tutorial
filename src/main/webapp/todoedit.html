@@ -1,0 +1,13 @@
+<section class="container">
+	<form name="editTodoForm">
+		<div ng-repeat="error in errors" class="alert">{{ error }}</div>
+		<label for="todo.title">Title</label>
+		<input type="text" ng-model="todo.title" id="todo.title" required ng-minlength="5" maxlength="50">
+		<label for="todo.due">Title</label>
+		<input type="date" id="todo.due" ng-model="todo.due" todo-date-input="">
+		<label class="checkbox"><input type="checkbox" ng-model="todo.completed"> Completed?</label>
+		<button class="btn btn-primary" ng-click="save()" ng-disabled="editTodoForm.$invalid">Save</button>
+		<a class="btn" href="#/list">Back to List</a>
+	</form>
+	{{todo|json}}
+</section>
