@@ -1,6 +1,6 @@
-var todo = angular.module('todo', []);
+var todo = angular.module('todo', [ 'ngRoute' ]);
 
-todo.config(function($routeProvider) {
+todo.config(function($routeProvider, $httpProvider) {
   $routeProvider.when('/list', {
     templateUrl : 'todolist.html',
     controller : 'TodoCtrl'

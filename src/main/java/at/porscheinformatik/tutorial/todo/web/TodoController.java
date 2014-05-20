@@ -1,10 +1,15 @@
 package at.porscheinformatik.tutorial.todo.web;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,17 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import at.porscheinformatik.tutorial.todo.Todo;
 import at.porscheinformatik.tutorial.todo.TodoService;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/data/todo")
 public class TodoController
 {
     @Inject
     private TodoService todoService;
 
-    @RequestMapping(value = "/list", method = GET)
+    @Inject
+    private MessageSource messageSource;
+
+    @RequestMapping(value = "/list", method = GET)  
     @ResponseBody
     public List<Todo> listAll()
     {
@@ -44,7 +50,7 @@ public class TodoController
     {
         if (result.hasErrors())
         {
-            return new Error().addErrors(result.getAllErrors());
+            return new Error().addErrors(messageSource, LocaleContextHolder.getLocale(), result.getAllErrors());
         }
 
         return todoService.addTodo(todo.title, todo.due);
@@ -56,7 +62,7 @@ public class TodoController
     {
         if (result.hasErrors())
         {
-            return new Error().addErrors(result.getAllErrors());
+            return new Error().addErrors(messageSource, LocaleContextHolder.getLocale(), result.getAllErrors());
         }
 
         return todoService.change(id, todo);

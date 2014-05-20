@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="todo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>AngularJS / Spring • Todo App</title>
+<link rel="stylesheet" href="webjars/bootstrap/3.1.1/css/bootstrap.css">
+<style>
+[ng-cloak] {
+	display: none;
+}
+
+body {
+	padding-top: 60px;
+}
+</style>
+</head>
+<body ng-controller="TodoCtrl">
+	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#/list">Todo</a>
+			</div>
+			<div>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label for="search">Search</label>
+						<input type="search" class="form-control" ng-model="searchText" id="search">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<ng-view></ng-view>
+	<script src="webjars/angularjs/1.2.16/angular.js"></script>
+	<script src="webjars/angularjs/1.2.16/angular-route.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
