@@ -2,14 +2,20 @@ package at.porscheinformatik.tutorial.todo;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Future;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
 public class Todo
 {
-    public int id;
+    @Id
+    @GeneratedValue
+    public Integer id;
 
     @NotEmpty
     @Length(min = 5, max = 50)
@@ -24,9 +30,8 @@ public class Todo
     {
     }
 
-    public Todo(int id, String title, Date due)
+    public Todo(String title, Date due)
     {
-        this.id = id;
         this.title = title;
         this.due = due;
     }

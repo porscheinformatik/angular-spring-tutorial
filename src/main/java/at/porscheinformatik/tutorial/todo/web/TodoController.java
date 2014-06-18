@@ -3,11 +3,9 @@ package at.porscheinformatik.tutorial.todo.web;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import java.util.List;
-
-import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,18 +19,18 @@ import at.porscheinformatik.tutorial.todo.Todo;
 import at.porscheinformatik.tutorial.todo.TodoService;
 
 @Controller
-@RequestMapping("/data/todo")
+@RequestMapping("/api/todo")
 public class TodoController
 {
-    @Inject
+    @Autowired
     private TodoService todoService;
 
-    @Inject
+    @Autowired
     private MessageSource messageSource;
 
     @RequestMapping(value = "/list", method = GET)  
     @ResponseBody
-    public List<Todo> listAll()
+    public Iterable<Todo> listAll()
     {
         return todoService.listAll();
     }

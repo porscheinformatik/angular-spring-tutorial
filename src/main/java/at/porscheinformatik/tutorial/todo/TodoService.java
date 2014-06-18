@@ -1,60 +1,42 @@
 package at.porscheinformatik.tutorial.todo;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class TodoService
 {
-    private int idSeq = 1;
-    private List<Todo> todos = new ArrayList<Todo>();
+    @Autowired
+    private TodoRepository repository;
 
-    public TodoService()
+    public Iterable<Todo> listAll()
     {
-        todos.add(new Todo(idSeq++, "Abwaschen", null));
-        todos.add(new Todo(idSeq++, "Einkaufen gehen", new Date()));
-    }
-
-    public List<Todo> listAll()
-    {
-        return Collections.unmodifiableList(todos);
+        return repository.findAll();
     }
 
     public Todo get(int id)
     {
-        for (Todo todo : todos)
-        {
-            if (todo.id == id)
-            {
-                return todo;
-            }
-        }
-        return null;
+        return repository.findOne(id);
     }
 
+    @Transactional
     public Todo addTodo(String title, Date due)
     {
-        Todo todo = new Todo(idSeq++, title, due);
-        todos.add(todo);
-        return todo;
+        Todo todo = new Todo(title, due);
+        return repository.save(todo);
     }
 
+    @Transactional
     public Todo change(int id, Todo changedTodo)
     {
-        for (Todo todo : todos)
-        {
-            if(todo.id == id)
-            {
-                todo.title = changedTodo.title;
-                todo.completed = changedTodo.completed;
-                todo.due = changedTodo.due;
-                return todo;
-            }
-        }
-        return null;
+        Todo todo = repository.findOne(id);
+        todo.title = changedTodo.title;
+        todo.due = changedTodo.due;
+        todo.completed = changedTodo.completed;
+        return todo;
     }
 }
