@@ -2,23 +2,24 @@
 	<form name="addTodoForm" class="form-inline">
 		<div ng-repeat="error in errors" class="alert alert-danger">{{ error }}</div>
 		<div class="form-group">
-			<label class="sr-only" for="newTodoTitle">New todo title</label> <input id="newTodoTitle" type="text"
-				class="form-control" placeholder="New todo title" ng-model="newTodoTitle" required="" ng-minlength="5" maxlength="50"/>
+			<label class="sr-only" for="newTodoTitle" th:text="#{todo.new_todo}">New todo</label> <input id="newTodoTitle" type="text"
+				class="form-control" th:placeholder="#{todo.new_todo}" ng-model="newTodoTitle" required="" ng-minlength="5" maxlength="50"/>
 		</div>
-		<button class="btn btn-primary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid">Add</button>
+		<button class="btn btn-primary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid" th:text="#{btn.add}">Add</button>
 	</form>
 </section>
 <section id="main" class="container">
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Todo</th>
-				<th>Completed?</th>
-				<th class="text-right">
-					<form class="form-inline">
+				<th th:text="#{todo.title}">Todo</th>
+				<th th:text="#{todo.completed}">Completed?</th>
+				<th th:text="#{todo.due}">Due</th>
+				<th>
+					<form class="form-inline pull-right">
 						<div class="form-group">
-							<label for="search" class="sr-only">Search</label> <input type="search" class="form-control"
-								ng-model="searchText" id="search" placeholder="Search"/>
+							<label for="search" class="sr-only" th:text="#{lbl.search}">Search</label> 
+							<input type="search" class="form-control" ng-model="searchText" id="search" th:placeholder="#{lbl.search}"/>
 						</div>
 					</form>
 				</th>
@@ -27,10 +28,11 @@
 		<tbody>
 			<tr ng-repeat="todo in todos | filter:searchText">
 				<td>{{todo.title}}</td>
-				<td><span class="label label-success" ng-show="todo.completed">Done</span> <span class="label label-info"
-					ng-hide="todo.completed">Open</span></td>
+				<td>
+					<span class="label label-success" ng-show="todo.completed">Done</span>
+					<span class="label label-info" ng-hide="todo.completed">Open</span></td>
 				<td>{{todo.due | date}}</td>
-				<td><button class="btn" ng-click="edit(todo.id)">Edit</button></td>
+				<td><button class="btn" ng-click="edit(todo.id)" th:text="#{btn.edit}">Edit</button></td>
 			</tr>
 		</tbody>
 	</table>

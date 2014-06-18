@@ -2,20 +2,17 @@
 	<form name="editTodoForm">
 		<div ng-repeat="error in errors" class="alert alert-danger">{{ error }}</div>
 		<div class="form-group">
-			<label for="todo.title">Title</label> <input type="text" class="form-control" ng-model="todo.title" id="todo.title"
-				required="" ng-minlength="5" maxlength="50"/>
+			<label for="todo.title" th:text="#{todo.title}">Title</label>
+			<input type="text" class="form-control" ng-model="todo.title" id="todo.title" required="" ng-minlength="5" maxlength="50"/>
 		</div>
 		<div class="input-group">
-			<label for="todo.due">Due</label>
-			<datepicker ng-model="todo.due" show-weeks="true" class="well well-sm"></datepicker>
+			<label for="todo.due" th:text="#{todo.due}">Due</label>
+			<datepicker id="todo.due" ng-model="todo.due" show-weeks="true" class="well well-sm"></datepicker>
 		</div>
-		<!-- 
-		<input type="text" class="form-control" datepicker-popup="'yyyy-MM-dd'" ng-model="todo.due" />
-		 -->
 		<div class="checkbox">
-			<label class="checkbox"><input type="checkbox" ng-model="todo.completed"/> Completed?</label>
+			<label class="checkbox"><input type="checkbox" ng-model="todo.completed"/><span th:text="#{todo.completed}">Completed?</span></label>
 		</div>
-		<button class="btn btn-primary" ng-click="save()" ng-disabled="editTodoForm.$invalid">Save</button>
-		<a class="btn btn-default" href="#/list">Back to List</a>
+		<button class="btn btn-primary" ng-click="save()" ng-disabled="editTodoForm.$invalid" th:text="#{btn.save}">Save</button>
+		<a class="btn btn-default" href="#/list" th:text="#{btn.back_to_list}">Back to List</a>
 	</form>
 </section>
