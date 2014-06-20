@@ -29,8 +29,8 @@
 			<tr ng-repeat="todo in todos | filter:searchText">
 				<td>{{todo.title}}</td>
 				<td>
-					<span class="label label-success" ng-show="todo.completed">Done</span>
-					<span class="label label-info" ng-hide="todo.completed">Open</span></td>
+					<span class="label label-success" ng-show="todo.completed" th:text="#{todo.completed_true}">Done</span>
+					<span class="label label-info" ng-hide="todo.completed"  th:text="#{todo.completed_false}">Open</span></td>
 				<td>{{todo.due | date}}</td>
 				<td><button class="btn" ng-click="edit(todo.id)" th:text="#{btn.edit}">Edit</button></td>
 			</tr>
