@@ -2,37 +2,25 @@
 
 ## Overview
 
-This application takes the developer thought the process of building a web-application using
-AngularJS with Spring as a backend. The application is loosely based on
-[AngularJS Tutorial](http://docs.angularjs.org/tutorial/). Each tag is a separate lesson
-teaching a single aspect.
+This is a tutorial application for [AngularJS](https://angularjs.org/) with [Spring IO Platform](https://spring.io/platform) as a backend.
 
-### step-0
+## Features
 
-- Clone the project 
-- Setup Eclipse
-- Start the application
+This application implements something like the infamous [TodoMVC](http://todomvc.com/) application including backend, I18n, and authentification:
 
-### step-1
+* Showing (and filtering) a list of all todos
+* Creating new todos
+* Changing todos (title, due date, completed flag)
 
-- Show the list of all Todos in a table
+## Used Technologies
 
-### step-2
-
-- Filter the list of Todos with a search field
-- Add completed field to table
-
-### step-3
-
-- Create a form to add new Todos on the client side
-
-### step-4
-
-- Validate the Todo title for minimum length of 5
-- Send new Todo to the server
-
-### step-5
-
-- Add routing
-- Add Todo detail page where you can edit the completed field
-- Add due date to Todo in backend and frontend
+ * User Interface
+   * HTML
+   * CSS with [Bootstrap](http://getbootstrap.com/)
+   * JavaScript with [AngularJS](https://angularjs.org/)
+ * Backend
+   * Dependency Injection + Web Handling [Spring Framework](http://projects.spring.io/spring-framework/)
+   * Database access
+     * Java Persistence API (JPA)
+     * [Spring Data JPA](http://projects.spring.io/spring-data-jpa/)
+   * Security with [Spring Security](http://projects.spring.io/spring-security/)
