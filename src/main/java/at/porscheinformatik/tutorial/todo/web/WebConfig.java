@@ -12,13 +12,26 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 
 @Configuration
-public class WebConfig
+public class WebConfig extends WebMvcConfigurerAdapter
 {
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry)
+    {
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/error").setViewName("error");
+
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/todolist").setViewName("todolist");
+        registry.addViewController("/todoedit").setViewName("todoedit");
+    }
+
     /**
      * This is needed to adapt parsing/sending of data fields in JSON.
      * 

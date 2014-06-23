@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html layout:decorator="layout">
+<head>
+<title>Login</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<section id="main" class="container">
+			<div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
+			<div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+			<form th:action="@{/login}" method="post" autocomplete="off">
+				<div class="form-group">
+					<label for="username" th:text="#{lbl.username}">Username</label>
+					<input type="text" class="form-control" id="username" name="username" required="" />
+				</div>
+				<div class="form-group">
+					<label for="password" th:text="#{lbl.password}">Password</label>
+					<input type="password" class="form-control" id="password" name="password" required="" />
+				</div>
+				<button type="submit" th:text="#{btn.login}">Login</button>
+			</form>
+		</section>
+	</div>
+</body>
+</html>

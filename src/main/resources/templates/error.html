@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html layout:decorator="layout">
+<head>
+<title>Application Error</title>
+</head>
+<body>
+	<div layout:fragment="content" ng-app="todo">
+		<h1 th:text="${errorCode}">500</h1>
+		<p th:text="${errorMessage}">java.lang.NullPointerException</p>
+	</div>
+</body>
+</html>

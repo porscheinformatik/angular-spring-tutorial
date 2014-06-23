@@ -2,12 +2,23 @@
 
   var todo = angular.module('todo', [ 'ngRoute', 'ui.bootstrap' ]);
 
+  todo.directive('logoutLink', function() {
+    return {
+      restrict : 'A',
+      link : function link(scope, element, attrs) {
+        element.bind('click', function() {
+          document.getElementById('logout').submit();
+        });
+      }
+    };
+  });
+
   todo.config(function($routeProvider, $httpProvider) {
     $routeProvider.when('/list', {
-      templateUrl : 'todolist.html',
+      templateUrl : 'todolist',
       controller : 'TodoCtrl'
     }).when('/edit/:id', {
-      templateUrl : 'todoedit.html',
+      templateUrl : 'todoedit',
       controller : 'TodoEditCtrl',
       resolve : {
         todoHttp : function($route, $http) {
