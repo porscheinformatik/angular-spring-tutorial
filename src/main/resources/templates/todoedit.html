@@ -1,13 +1,12 @@
 <section class="container">
 	<form name="editTodoForm">
-		<div ng-repeat="error in errors" class="alert alert-danger">{{ error }}</div>
-		<div class="form-group">
-			<label for="todo.title" th:text="#{todo.title}">Title</label>
-			<input type="text" class="form-control" ng-model="todo.title" id="todo.title" required="" ng-minlength="5" maxlength="50"/>
+		<div class="form-group" ng-class="{'has-error': editTodoForm.title.$invalid}">
+			<label for="todo.title" class="control-label" th:text="#{todo.title}">Title</label>
+			<input type="text" class="form-control" ng-model="todo.title" name="title" id="todo.title" required="" ng-minlength="5" maxlength="50"/>
 		</div>
-		<div class="input-group">
-			<label for="todo.due" th:text="#{todo.due}">Due</label>
-			<datepicker id="todo.due" ng-model="todo.due" show-weeks="true" class="well well-sm"></datepicker>
+		<div class="form-group">
+			<label for="todo.due" class="control-label" th:text="#{todo.due}">Due</label>
+			<datepicker id="todo.due" ng-model="todo.due" show-weeks="true"></datepicker>
 		</div>
 		<div class="checkbox">
 			<label class="checkbox"><input type="checkbox" ng-model="todo.completed"/><span th:text="#{todo.completed}">Completed?</span></label>

@@ -2,12 +2,15 @@ package at.porscheinformatik.tutorial.todo;
 
 import java.util.Date;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
+@RolesAllowed({"USER", "ADMIN"})
 public class TodoService
 {
     @Autowired

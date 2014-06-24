@@ -7,7 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,38 +26,38 @@ public class TodoController
     @Autowired
     private MessageSource messageSource;
 
-    @RequestMapping(value = "/list", method = GET)  
-    public Iterable<Todo> listAll()
+    @RequestMapping(value = "/list", method = GET)
+    public Response listAll()
     {
-        return todoService.listAll();
+        return Response.ok(todoService.listAll());
     }
 
     @RequestMapping(value = "/{id}", method = GET)
-    public Todo get(@PathVariable int id)
+    public Response get(@PathVariable int id)
     {
-        return todoService.get(id);
+        return Response.ok(todoService.get(id));
     }
 
     @RequestMapping(value = "/new", method = POST)
-    public Object newTodo(@RequestBody @Valid Todo todo, BindingResult result)
+    public Response newTodo(@RequestBody @Valid Todo todo, BindingResult result)
     {
         if (result.hasErrors())
         {
-            return new Error().addErrors(messageSource, LocaleContextHolder.getLocale(), result.getAllErrors());
+            return Response.error(messageSource, result.getAllErrors());
         }
 
-        return todoService.addTodo(todo.title, todo.due);
+        return Response.ok(todoService.addTodo(todo.title, todo.due));
     }
 
     @RequestMapping(value = "/{id}", method = POST)
-    public Object change(@PathVariable int id, @RequestBody @Valid Todo todo, BindingResult result)
+    public Response change(@PathVariable int id, @RequestBody @Valid Todo todo, BindingResult result)
     {
         if (result.hasErrors())
         {
-            return new Error().addErrors(messageSource, LocaleContextHolder.getLocale(), result.getAllErrors());
+            return Response.error(messageSource, result.getAllErrors());
         }
 
-        return todoService.change(id, todo);
+        return Response.ok(todoService.change(id, todo));
     }
 
 }

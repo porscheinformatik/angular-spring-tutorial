@@ -6,8 +6,8 @@
 <body>
 	<div layout:fragment="content">
 		<section id="main" class="container">
-			<div th:if="${param.error}" class="alert alert-danger">Invalid username and password.</div>
-			<div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
+			<div th:if="${param.error}" class="alert alert-danger" th:text="#{login.invalid}">Invalid username and password.</div>
+			<div th:if="${param.logout}" class="alert alert-success" th:text="#{login.logout_success}">You have been logged out.</div>
 			<form th:action="@{/login}" method="post" autocomplete="off">
 				<div class="form-group">
 					<label for="username" th:text="#{lbl.username}">Username</label>

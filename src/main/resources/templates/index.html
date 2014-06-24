@@ -5,6 +5,9 @@
 </head>
 <body>
 	<div layout:fragment="content">
+		<div class="container" ng-show="errors" ng-controller="ErrorController">
+			<alert ng-repeat="error in errors" type="{{'danger'}}" close="close($index)">{{ error }}</alert>
+		</div>
 		<ng-view></ng-view>
 	</div>
 </body>

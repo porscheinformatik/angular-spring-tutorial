@@ -1,9 +1,8 @@
 <section class="container">
 	<form name="addTodoForm" class="form-inline">
-		<div ng-repeat="error in errors" class="alert alert-danger">{{ error }}</div>
 		<div class="form-group">
-			<label class="sr-only" for="newTodoTitle" th:text="#{todo.new_todo}">New todo</label> <input id="newTodoTitle" type="text"
-				class="form-control" th:placeholder="#{todo.new_todo}" ng-model="newTodoTitle" required="" ng-minlength="5" maxlength="50"/>
+			<label for="todo.title" class="sr-only" th:text="#{todo.new_todo}">New todo</label>
+			<input id="todo.title" type="text" class="form-control" th:placeholder="#{todo.new_todo}" ng-model="newTodoTitle" required="" ng-minlength="5" maxlength="50"/>
 		</div>
 		<button class="btn btn-primary" ng-click="addTodo()" ng-disabled="addTodoForm.$invalid" th:text="#{btn.add}">Add</button>
 	</form>
