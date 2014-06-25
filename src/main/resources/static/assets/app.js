@@ -16,7 +16,6 @@
       'response' : function(response) {
         if (typeof response.data === 'object') {
           if (response.data.status === 'ERROR') {
-            console.log(response.data);
             $rootScope.errors = response.data.messages;
             response.data = null;
           } else if (response.data.status === 'OK') {
