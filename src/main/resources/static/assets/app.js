@@ -2,10 +2,6 @@
 
   var app = angular.module('todo', [ 'ngRoute', 'ui.bootstrap' ]);
 
-  app.config(function($httpProvider) {
-    $httpProvider.interceptors.push('connectionInterceptor');
-  });
-
   app.factory('connectionInterceptor', function($q, $rootScope) {
     return {
       'responseError' : function(response) {
@@ -28,6 +24,25 @@
     };
   });
 
+  app.config(function($routeProvider, $httpProvider) {
+    $httpProvider.interceptors.push('connectionInterceptor');
+
+    $routeProvider.when('/list', {
+      templateUrl : 'todolist',
+      controller : 'TodoCtrl'
+    }).when('/edit/:id', {
+      templateUrl : 'todoedit',
+      controller : 'TodoEditCtrl',
+      resolve : {
+        todoHttp : function($route, $http) {
+          return $http.get('api/todo/' + $route.current.params.id);
+        }
+      }
+    }).otherwise({
+      redirectTo : '/list'
+    });
+  });
+
   app.controller('ErrorController', function($rootScope, $scope) {
     $scope.close = function(index) {
       $rootScope.errors.splice(index, 1);
@@ -43,23 +58,6 @@
         });
       }
     };
-  });
-
-  app.config(function($routeProvider, $httpProvider) {
-    $routeProvider.when('/list', {
-      templateUrl : 'todolist',
-      controller : 'TodoCtrl'
-    }).when('/edit/:id', {
-      templateUrl : 'todoedit',
-      controller : 'TodoEditCtrl',
-      resolve : {
-        todoHttp : function($route, $http) {
-          return $http.get('api/todo/' + $route.current.params.id);
-        }
-      }
-    }).otherwise({
-      redirectTo : '/list'
-    });
   });
 
   app.controller('TodoCtrl', function($scope, $http, $location) {
