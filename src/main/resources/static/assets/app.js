@@ -13,7 +13,7 @@
         if (typeof response.data === 'object') {
           if (response.data.status === 'ERROR') {
             $rootScope.errors = response.data.messages;
-            response.data = null;
+            return $q.reject(response);
           } else if (response.data.status === 'OK') {
             response.data = response.data.result;
             $rootScope.errors = null;
@@ -70,10 +70,8 @@
       $http.post('api/todo/new', {
         title : $scope.newTodoTitle
       }).success(function(data) {
-        if (data) {
-          $scope.todos.push(data);
-          $scope.newTodoTitle = '';
-        }
+        $scope.todos.push(data);
+        $scope.newTodoTitle = '';
       });
     };
 
@@ -90,9 +88,7 @@
     }
     $scope.save = function() {
       $http.post('/api/todo/' + $scope.todo.id, $scope.todo).success(function(data) {
-        if (data) {
-          $location.path('/list');
-        }
+         $location.path('/list');
       });
     };
   });
