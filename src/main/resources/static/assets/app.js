@@ -5,20 +5,16 @@
   app.factory('connectionInterceptor', function($q, $rootScope) {
     return {
       'responseError' : function(response) {
-        $rootScope.errors = [ 'Server error: ' + response.statusText + "(" + response.status + ")" ];
-        return {};
+        if(response.status === 400 && typeof response.data === 'object') {
+          $rootScope.errors = response.data;
+        } else {
+          $rootScope.errors = [ 'Server error: ' + response.statusText + "(" + response.status + ")" ];
+        }
+        return $q.reject(response);
       },
 
       'response' : function(response) {
-        if (typeof response.data === 'object') {
-          if (response.data.status === 'ERROR') {
-            $rootScope.errors = response.data.messages;
-            return $q.reject(response);
-          } else if (response.data.status === 'OK') {
-            response.data = response.data.result;
-            $rootScope.errors = null;
-          }
-        }
+        $rootScope.errors = null;
         return response;
       }
     };

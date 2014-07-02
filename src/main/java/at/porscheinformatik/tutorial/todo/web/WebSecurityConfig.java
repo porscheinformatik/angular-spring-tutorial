@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
@@ -33,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().csrfTokenRepository(csrfTokenRepository);
 
         http.authorizeRequests()
-            .antMatchers("/assets/**", "/webjars/**", "/login/**").permitAll()
+            .antMatchers("/assets/**", "/webjars/**", "/login/**", "/api-docs/**").permitAll()
             .anyRequest().fullyAuthenticated();
 
         http.formLogin()
@@ -47,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .contentTypeOptions()
             .xssProtection()
             .httpStrictTransportSecurity()
+            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://petstore.swagger.wordnik.com"))
             .addHeaderWriter(new CsrfTokenCookieWriter(csrfTokenRepository, CSRF_COOKIE_NAME));
     }
 

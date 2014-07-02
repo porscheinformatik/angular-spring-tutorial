@@ -41,6 +41,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- API docs -->
+		<dependency>
+			<groupId>com.mangofactory</groupId>
+			<artifactId>swagger-springmvc</artifactId>
+			<version>0.8.4</version>
+		</dependency>
+
 		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,17 +108,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<includes>
-					<include>banner.txt</include>
-				</includes>
 				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>banner.txt</exclude>
-				</excludes>
-				<filtering>false</filtering>
 			</resource>
 		</resources>
 		<plugins>
