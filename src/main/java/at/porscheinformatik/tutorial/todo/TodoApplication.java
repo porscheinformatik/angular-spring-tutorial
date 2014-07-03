@@ -47,7 +47,7 @@ public class TodoApplication extends SpringBootServletInitializer
     {
         return new SwaggerSpringMvcPlugin(springSwaggerConfig)
             .apiInfo(new ApiInfo("", "", "", "", "", ""))
-            .apiVersion(env.getProperty("app.version"))
+            .apiVersion(env.getProperty("info.app.version"))
             .directModelSubstitute(Iterable.class, List.class)
             .includePatterns("/api.*");
     }
