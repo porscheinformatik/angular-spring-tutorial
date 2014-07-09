@@ -127,6 +127,28 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>1.3.1.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jsSrcDir>src/main/resources/static/assets</jsSrcDir>
+					<preloadSources>
+						<source>webjars/angular.js</source>
+						<source>webjars/angular-route.js</source>
+						<source>webjars/ui-bootstrap.js</source>
+						<source>webjars/angular-mocks.js</source>
+					</preloadSources>
+					<webDriverClassName>org.openqa.selenium.phantomjs.PhantomJSDriver</webDriverClassName>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
