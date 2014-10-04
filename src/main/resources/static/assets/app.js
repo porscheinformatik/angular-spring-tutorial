@@ -1,6 +1,8 @@
+/* global window */
 (function(angular) {
+  'use strict';
 
-  var app = angular.module('todo', [ 'ngRoute', 'ui.bootstrap' ]);
+  var app = angular.module('todo', [ 'ngRoute', 'ngMessages', 'ui.bootstrap' ]);
 
   app.factory('connectionInterceptor', function($q, $rootScope) {
     return {
@@ -48,7 +50,7 @@
   app.directive('logoutLink', function() {
     return {
       restrict : 'A',
-      link : function link(scope, element, attrs) {
+      link : function link(scope, element) {
         element.bind('click', function() {
           document.getElementById('logout').submit();
         });
@@ -83,10 +85,10 @@
       $scope.todo.due = new Date(Date.parse($scope.todo.due));
     }
     $scope.save = function() {
-      $http.post('/api/todo/' + $scope.todo.id, $scope.todo).success(function(data) {
-         $location.path('/list');
+      $http.post('/api/todo/' + $scope.todo.id, $scope.todo).success(function() {
+        $location.path('/list');
       });
     };
   });
 
-}(angular));
+}(window.angular));
