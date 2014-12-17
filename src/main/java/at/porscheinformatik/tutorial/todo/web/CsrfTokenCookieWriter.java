@@ -1,5 +1,7 @@
 package at.porscheinformatik.tutorial.todo.web;
 
+import static org.springframework.util.StringUtils.*;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.header.HeaderWriter;
+import org.springframework.util.StringUtils;
 
 /**
  * Adds the CSRF token as cookie to be read by AngularJS.
@@ -35,6 +38,9 @@ public class CsrfTokenCookieWriter implements HeaderWriter
             token = tokenRepository.generateToken(request);
         }
 
-        response.addCookie(new Cookie(cookieName, token.getToken()));
+        String contextPath = request.getContextPath();
+        Cookie csrfCookie = new Cookie(cookieName, token.getToken());
+		csrfCookie.setPath(isEmpty(contextPath) ? "/" : contextPath);
+		response.addCookie(csrfCookie);
     }
 }
