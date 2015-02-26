@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<link th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.css}" rel="stylesheet" />
+<link th:href="@{'/webjars/bootstrap/' + #{bootstrap.version} + '/css/bootstrap.min.css'}" rel="stylesheet" />
 <link th:href="@{/assets/style.css}" rel="stylesheet" />
 <!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,12 +32,12 @@
 
 	<div class="container-fluid" layout:fragment="content"></div>
 
-	<script th:src="@{/webjars/angularjs/1.3.2/angular.js}"></script>
-	<script th:src="@{/webjars/angularjs/1.3.2/angular-route.js}"></script>
-	<script th:src="@{/webjars/angularjs/1.3.2/angular-messages.js}"></script>
-	<script th:src="@{'/webjars/angularjs/1.3.2/i18n/angular-locale_' + ${T(org.springframework.context.i18n.LocaleContextHolder).getLocale().toLanguageTag().toLowerCase()} + '.js'}"></script>
-	<script th:src="@{/webjars/angular-ui-bootstrap/0.11.2/ui-bootstrap.js}"></script>
-	<script th:src="@{/webjars/angular-ui-bootstrap/0.11.2/ui-bootstrap-tpls.js}"></script>
+	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular.js'}"></script>
+	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular-route.js'}"></script>
+	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular-messages.js'}"></script>
+	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/i18n/angular-locale_' + ${#strings.toLowerCase(#locale.language)} + '.js'}"></script>
+	<script th:if="${!#strings.isEmpty(#locale.country)}" th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/i18n/angular-locale_' + ${#strings.toLowerCase(#locale.language + '-' + #locale.country)} + '.js'}"></script>
+	<script th:src="@{'/webjars/angular-ui-bootstrap/' + #{angular-ui-bootstrap.version} + '/ui-bootstrap-tpls.js'}"></script>
 	<script th:src="@{/assets/app.js}"></script>
 </body>
 </html>
