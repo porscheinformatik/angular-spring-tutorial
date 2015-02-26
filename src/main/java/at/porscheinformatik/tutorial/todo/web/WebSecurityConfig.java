@@ -6,13 +6,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
@@ -23,14 +23,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private DataSource dataSource;
 
+    // injected to so that schem update occurs before users initialization below
     @Autowired
     private EntityManagerFactory emf;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
-        HttpSessionCsrfTokenRepository csrfTokenRepository = new HttpSessionCsrfTokenRepository();
+        StatelessCsrfTokenRepository csrfTokenRepository = new StatelessCsrfTokenRepository();
         csrfTokenRepository.setHeaderName(CSRF_HEADER_NAME);
+        csrfTokenRepository.setCookieName(CSRF_COOKIE_NAME);
         http.csrf().csrfTokenRepository(csrfTokenRepository);
 
         http.authorizeRequests()
@@ -47,9 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.headers()
             .contentTypeOptions()
             .xssProtection()
-            .httpStrictTransportSecurity()
-            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://petstore.swagger.wordnik.com"))
-            .addHeaderWriter(new CsrfTokenCookieWriter(csrfTokenRepository, CSRF_COOKIE_NAME));
+            .httpStrictTransportSecurity();
     }
 
     @Override
@@ -62,5 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .passwordEncoder(passwordEncoder)
             .withUser("user").password(passwordEncoder.encode("user")).authorities("USER").and()
             .withUser("admin").password(passwordEncoder.encode("admin")).authorities("ADMIN");
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception
+    {
+        return super.authenticationManagerBean();
     }
 }
