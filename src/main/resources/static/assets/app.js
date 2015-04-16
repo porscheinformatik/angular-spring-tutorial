@@ -33,7 +33,7 @@
       controller : 'TodoEditCtrl',
       resolve : {
         todoHttp : function($route, $http) {
-          return $http.get('api/todo/' + $route.current.params.id);
+          return $http.get('api/todos/' + $route.current.params.id);
         }
       }
     }).otherwise({
@@ -61,12 +61,12 @@
 
   app.controller('TodoCtrl', function($scope, $http, $location) {
 
-    $http.get('api/todo/list').success(function(data) {
+    $http.get('api/todos').success(function(data) {
       $scope.todos = data;
     });
 
     $scope.addTodo = function() {
-      $http.post('api/todo/new', {
+      $http.post('api/todos', {
         title : $scope.newTodoTitle
       }).success(function(data) {
         $scope.todos.push(data);
@@ -86,7 +86,7 @@
       $scope.todo.due = new Date(Date.parse($scope.todo.due));
     }
     $scope.save = function() {
-      $http.post('/api/todo/' + $scope.todo.id, $scope.todo).success(function() {
+      $http.post('/api/todos/' + $scope.todo.id, $scope.todo).success(function() {
         $location.path('/list');
       });
     };

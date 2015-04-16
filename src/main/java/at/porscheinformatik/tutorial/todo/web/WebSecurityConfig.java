@@ -37,12 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         http.authorizeRequests()
             .antMatchers("/assets/**", "/webjars/**", "/login/**", "/api-docs/**").permitAll()
+            .antMatchers("/jsondoc/**", "/jsondoc-ui.html").permitAll()
             .anyRequest().fullyAuthenticated();
 
         http.formLogin()
             .loginProcessingUrl("/login")
             .loginPage("/login")
             .failureUrl("/login?error");
+
+        http.httpBasic();
 
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout");
 
