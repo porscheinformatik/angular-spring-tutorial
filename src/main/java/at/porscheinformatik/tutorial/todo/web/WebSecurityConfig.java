@@ -2,7 +2,6 @@ package at.porscheinformatik.tutorial.todo.web;
 
 import java.security.SecureRandom;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
     @Autowired
     private DataSource dataSource;
-
-    @Autowired
-    private EntityManagerFactory emf;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception
