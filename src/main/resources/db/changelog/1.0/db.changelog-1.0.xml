@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="20150909-1" author="derkoe">
+        <comment>Create Spring Security base tables USERS and AUTHORITIES</comment>
+        <createTable tableName="USERS">
+            <column name="USERNAME" type="VARCHAR(50)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="PASSWORD" type="VARCHAR(65)" />
+            <column name="ENABLED" type="BOOLEAN" />
+        </createTable>
+        <createTable tableName="AUTHORITIES">
+            <column name="USERNAME" type="VARCHAR(50)" />
+            <column name="AUTHORITY" type="VARCHAR(50)" />
+        </createTable>
+        <addPrimaryKey columnNames="USERNAME, AUTHORITY" constraintName="PK_AUTHORITIES" tableName="AUTHORITIES" />
+        <addForeignKeyConstraint constraintName="FK_AUTHORITIES_USERS" baseTableName="AUTHORITIES"
+            baseColumnNames="USERNAME" referencedTableName="USERS" referencedColumnNames="USERNAME" />
+    </changeSet>
+
+    <changeSet id="20150909-2" author="derkoe">
+        <comment>Create TODO table</comment>
+        <createTable tableName="TODOS">
+            <column name="ID" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="TITLE" type="VARCHAR(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="DUE" type="TIMESTAMP" />
+            <column name="COMPLETED" type="BOOLEAN"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20150909-3" author="derkoe">
+    </changeSet>
+
+</databaseChangeLog>

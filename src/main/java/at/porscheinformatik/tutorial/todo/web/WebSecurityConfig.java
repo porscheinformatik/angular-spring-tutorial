@@ -49,7 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             .contentTypeOptions()
             .xssProtection()
             .httpStrictTransportSecurity()
-            .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://petstore.swagger.wordnik.com"))
+            .addHeaderWriter(
+                new StaticHeadersWriter("Access-Control-Allow-Origin", "http://petstore.swagger.wordnik.com"))
             .addHeaderWriter(new CsrfTokenCookieWriter(csrfTokenRepository, CSRF_COOKIE_NAME));
     }
 
@@ -60,9 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 
         auth.jdbcAuthentication()
             .dataSource(dataSource)
-            .passwordEncoder(passwordEncoder)
-            .withUser("user").password(passwordEncoder.encode("user")).authorities("USER").and()
-            .withUser("admin").password(passwordEncoder.encode("admin")).authorities("ADMIN");
+            .passwordEncoder(passwordEncoder);
     }
 
     @Bean

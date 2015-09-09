@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<launchConfiguration type="org.springframework.ide.eclipse.boot.launch">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/angular-spring-tutorial/src/main/java/at/porscheinformatik/tutorial/todo/TodoApplication.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="at.porscheinformatik.tutorial.todo.TodoApplication"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="angular-spring-tutorial"/>
-<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dspring.liveBeansView.mbeanDomain&#13;&#10;-Dcom.sun.management.jmxremote&#13;&#10;-Dcom.sun.management.jmxremote.port=10001&#13;&#10;-Dcom.sun.management.jmxremote.authenticate=false&#13;&#10;-Dcom.sun.management.jmxremote.ssl=false"/>
+<stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>
+<booleanAttribute key="spring.boot.debug.enable" value="false"/>
+<booleanAttribute key="spring.boot.lifecycle.enable" value="true"/>
+<booleanAttribute key="spring.boot.livebean.enable" value="true"/>
+<stringAttribute key="spring.boot.livebean.port" value="54868"/>
+<stringAttribute key="spring.boot.profile" value="dev"/>
 </launchConfiguration>

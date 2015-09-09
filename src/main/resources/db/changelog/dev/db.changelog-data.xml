@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="dev-data" author="derkoe" context="dev">
+        <comment>Creating user for local dev environment with auth: user/password</comment>
+        <insert tableName="USERS">
+            <column name="USERNAME" value="user" />
+            <column name="PASSWORD" value="$2a$10$HUlNwoKCEaP./MrlyGYz6erWz.DRCDUot5kNSlQPL8ffLZtEJnFUS" />
+            <column name="ENABLED" valueBoolean="true" />
+        </insert>
+        <insert tableName="AUTHORITIES">
+            <column name="USERNAME" value="user" />
+            <column name="AUTHORITY" value="USER" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
