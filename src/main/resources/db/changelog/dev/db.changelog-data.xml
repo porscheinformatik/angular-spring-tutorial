@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="dev-data" author="derkoe" context="dev">
+    <changeSet id="dev-users" author="derkoe" context="dev">
         <comment>Creating user for local dev environment with auth: user/password</comment>
         <insert tableName="USERS">
             <column name="USERNAME" value="user" />
@@ -14,6 +14,15 @@
         <insert tableName="AUTHORITIES">
             <column name="USERNAME" value="user" />
             <column name="AUTHORITY" value="USER" />
+        </insert>
+    </changeSet>
+
+    <changeSet id="dev-todos" author="derkoe" context="dev">
+        <comment>Creating a todo</comment>
+        <insert tableName="TODOS">
+            <column name="TITLE" value="You have to do me, really!" />
+            <column name="DUE" valueDate="" />
+            <column name="COMPLETED" valueBoolean="false" />
         </insert>
     </changeSet>
 

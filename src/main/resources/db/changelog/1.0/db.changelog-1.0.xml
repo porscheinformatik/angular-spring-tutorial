@@ -36,7 +36,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="20150909-3" author="derkoe">
-    </changeSet>
-
 </databaseChangeLog>
