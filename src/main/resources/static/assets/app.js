@@ -2,7 +2,7 @@
 (function(angular) {
   'use strict';
 
-  var app = angular.module('todo', [ 'ngRoute', 'ngMessages', 'ui.bootstrap' ]);
+  var app = angular.module('todo', [ 'ngRoute', 'ui.bootstrap' ]);
 
   app.factory('connectionInterceptor', function($q, $rootScope) {
     return {

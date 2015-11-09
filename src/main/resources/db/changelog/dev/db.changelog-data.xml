@@ -20,8 +20,8 @@
     <changeSet id="dev-todos" author="derkoe" context="dev">
         <comment>Creating a todo</comment>
         <insert tableName="TODOS">
-            <column name="TITLE" value="You have to do me, really!" />
-            <column name="DUE" valueDate="" />
+            <column name="TITLE"  value="You have to do me, really!" />
+            <column name="DUE" valueComputed="CURRENT_DATE" />
             <column name="COMPLETED" valueBoolean="false" />
         </insert>
     </changeSet>
