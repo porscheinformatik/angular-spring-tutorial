@@ -46,10 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout");
 
         http.headers()
+            .defaultsDisabled()
             .contentTypeOptions()
-            .xssProtection()
-            .httpStrictTransportSecurity()
-            .addHeaderWriter(
+            .and().xssProtection()
+            .and().httpStrictTransportSecurity()
+            .and().addHeaderWriter(
                 new StaticHeadersWriter("Access-Control-Allow-Origin", "http://petstore.swagger.wordnik.com"))
             .addHeaderWriter(new CsrfTokenCookieWriter(csrfTokenRepository, CSRF_COOKIE_NAME));
     }
