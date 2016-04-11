@@ -11,6 +11,7 @@
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <!  [endif]-->
+<base href="/" />
 </head>
 <body ng-app="todo">
 	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -32,12 +33,14 @@
 
 	<div class="container-fluid" layout:fragment="content"></div>
 
-	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular.js'}"></script>
+	<!--<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular.js'}"></script>
 	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular-route.js'}"></script>
 	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/angular-messages.js'}"></script>
 	<script th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/i18n/angular-locale_' + ${#strings.toLowerCase(#locale.language)} + '.js'}"></script>
 	<script th:if="${!#strings.isEmpty(#locale.country)}" th:src="@{'/webjars/angularjs/' + #{angularjs.version} + '/i18n/angular-locale_' + ${#strings.toLowerCase(#locale.language + '-' + #locale.country)} + '.js'}"></script>
-	<script th:src="@{'/webjars/angular-ui-bootstrap/' + #{angular-ui-bootstrap.version} + '/ui-bootstrap-tpls.js'}"></script>
-	<script th:src="@{/assets/app.js}"></script>
+	<script th:src="@{'/webjars/angular-ui-bootstrap/' + #{angular-ui-bootstrap.version} + '/ui-bootstrap-tpls.js'}"></script> -->
+	<!--  <script th:src="@{/assets/app.js}"></script> -->
+	<script th:src="@{'/assets/vendor.min.js'}"></script>
+	<script th:src="@{'/assets/app.min.js'}"></script>
 </body>
 </html>
