@@ -1,14 +1,20 @@
 package at.porscheinformatik.tutorial.todo.web;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.http.MediaType.*;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 import javax.validation.Valid;
 
-import org.jsondoc.core.annotation.*;
+import org.jsondoc.core.annotation.Api;
+import org.jsondoc.core.annotation.ApiAuthBasic;
+import org.jsondoc.core.annotation.ApiAuthBasicUser;
+import org.jsondoc.core.annotation.ApiBodyObject;
+import org.jsondoc.core.annotation.ApiMethod;
+import org.jsondoc.core.annotation.ApiPathParam;
+import org.jsondoc.core.annotation.ApiResponseObject;
+import org.jsondoc.core.annotation.ApiVersion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +25,7 @@ import at.porscheinformatik.tutorial.todo.TodoService;
 
 @Api(name = "Todo Resource", description = "API for mananging Todo items.")
 @ApiVersion(since = "1.0.0")
-@ApiAuthBasic(roles = "USER", testusers = @ApiAuthBasicUser(username = "user", password = "user"))
+@ApiAuthBasic(roles = "USER", testusers = @ApiAuthBasicUser(username = "user", password = "user") )
 @RestController
 @RequestMapping(value = "/api/todos", produces = APPLICATION_JSON_VALUE)
 public class TodoController
@@ -27,6 +33,7 @@ public class TodoController
     @Autowired
     private TodoService todoService;
 
+    @Secured("ROLE_USER")
     @ApiMethod(description = "A list of all todos")
     @ApiResponseObject
     @RequestMapping(method = GET)

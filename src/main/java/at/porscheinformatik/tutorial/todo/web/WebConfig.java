@@ -21,15 +21,26 @@ import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter
 {
+    
+    private static final String[] TEMPLATE_VIEW_URLS = {"/index.html", "/login.html", "/error.html",
+        "/todolist.html", "/todoedit.html"};
+    
     @Override
     public void addViewControllers(ViewControllerRegistry registry)
     {
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/error").setViewName("error");
+        
+        registry.addRedirectViewController("/", "/index.html");
+        
+        for (String url : TEMPLATE_VIEW_URLS)
+        {
+            registry.addViewController(url).setViewName(url.substring(1, url.length() - 5));
+        }
 
-        registry.addViewController("/").setViewName("index");
-        registry.addViewController("/todolist").setViewName("todolist");
-        registry.addViewController("/todoedit").setViewName("todoedit");
+        // To work with html5 mode (router.config)
+        registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/list").setViewName("index");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/error").setViewName("index");
     }
 
     /**

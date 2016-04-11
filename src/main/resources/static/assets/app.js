@@ -22,6 +22,7 @@
     };
   });
 
+  // umbau auf ui-router
   app.config(function($routeProvider, $httpProvider) {
     $httpProvider.interceptors.push('connectionInterceptor');
 
@@ -41,12 +42,14 @@
     });
   });
 
+  // Controller
   app.controller('ErrorController', function($rootScope, $scope) {
     $scope.close = function(index) {
       $rootScope.errors.splice(index, 1);
     };
   });
 
+  // directives
   app.directive('logoutLink', function() {
     return {
       restrict : 'A',
@@ -59,13 +62,16 @@
     };
   });
 
+//Controller
   app.controller('TodoCtrl', function($scope, $http, $location) {
 
+    // service
     $http.get('api/todos').success(function(data) {
       $scope.todos = data;
     });
 
     $scope.addTodo = function() {
+      // service
       $http.post('api/todos', {
         title : $scope.newTodoTitle
       }).success(function(data) {
@@ -80,16 +86,18 @@
 
   });
 
+//Controller
   app.controller('TodoEditCtrl', function($scope, $http, $location, todoHttp) {
     $scope.todo = todoHttp.data;
     if ($scope.todo.due) {
       $scope.todo.due = new Date(Date.parse($scope.todo.due));
     }
     $scope.save = function() {
+      // service
       $http.post('/api/todos/' + $scope.todo.id, $scope.todo).success(function() {
         $location.path('/list');
       });
     };
-  });
+  }); 
 
 }(window.angular));
