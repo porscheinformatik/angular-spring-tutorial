@@ -7,6 +7,7 @@ namespace todo.core {
 
       $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise("/list");
+      $httpProvider.interceptors.push(todo.core.ConnectionInterceptor.Factory);
 
       $stateProvider.state("base", {
         abstract: true,
